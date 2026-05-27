@@ -113,6 +113,53 @@ const Navbar = () => {
     { label: "Sob Medida",sub: "Alfaiataria própria" },
     { label: "Acessórios",sub: "Cintos, gravatas, lenços" },
   ];
+  // Lock body scroll while drawer is open
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, [open]);
+
+  const drawer = open && ReactDOM.createPortal(
+    <div
+      onClick={() => setOpen(false)}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 9999,
+        background: "#ffffff",
+        overflowY: "auto",
+        WebkitOverflowScrolling: "touch",
+      }}
+      className="animate-in fade-in"
+    >
+      <div className="px-6 py-5 flex items-center justify-between border-b border-[var(--tv-line)]">
+        <Wordmark style={{ fontSize: 18 }}/>
+        <button onClick={() => setOpen(false)} aria-label="Fechar menu"><Icon name="x"/></button>
+      </div>
+      <div className="px-6 py-6 space-y-1" onClick={(e) => e.stopPropagation()}>
+        {items.map(i => (
+          <a key={i.label} href="#" className="flex items-center justify-between py-4 border-b border-[var(--tv-line-2)]">
+            <div>
+              <div className="text-[20px] font-display">{i.label}</div>
+              <div className="text-[12px] text-[var(--tv-ink-2)] mt-0.5">{i.sub}</div>
+            </div>
+            <Icon name="chev-right" size={18}/>
+          </a>
+        ))}
+        <a href="#consultoria" className="flex items-center justify-between py-4 border-b border-[var(--tv-line-2)]">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
+            <div className="text-[20px] font-display">Consultoria</div>
+          </div>
+          <Icon name="chev-right" size={18}/>
+        </a>
+      </div>
+    </div>,
+    document.body
+  );
+
   return (
     <header className="nav-glass sticky top-0 z-40">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-10 h-[68px] flex items-center justify-between">
@@ -151,26 +198,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* mobile drawer */}
-      {open && (
-        <div className="fixed inset-0 z-50 bg-white animate-in fade-in" onClick={() => setOpen(false)}>
-          <div className="px-6 py-5 flex items-center justify-between border-b border-[var(--tv-line)]">
-            <Wordmark style={{ fontSize: 18 }}/>
-            <button onClick={() => setOpen(false)}><Icon name="x"/></button>
-          </div>
-          <div className="px-6 py-6 space-y-1">
-            {items.map(i => (
-              <a key={i.label} href="#" className="flex items-center justify-between py-4 border-b border-[var(--tv-line-2)]">
-                <div>
-                  <div className="text-[20px] font-display">{i.label}</div>
-                  <div className="text-[12px] text-[var(--tv-ink-2)] mt-0.5">{i.sub}</div>
-                </div>
-                <Icon name="chev-right" size={18}/>
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
+      {drawer}
     </header>
   );
 };
