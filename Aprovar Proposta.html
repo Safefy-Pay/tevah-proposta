@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Aprovar Proposta — Dados para Contrato · Tevah</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  :root {
+    --tv-bg: #FAFAFA;
+    --tv-surface: #FFFFFF;
+    --tv-ink: #1D1D1F;
+    --tv-ink-2: #6E6E73;
+    --tv-ink-3: #86868B;
+    --tv-accent: #0A0A0A;
+    --tv-line: rgba(0,0,0,0.08);
+    --tv-line-2: rgba(0,0,0,0.04);
+  }
+  html, body {
+    background: var(--tv-bg);
+    color: var(--tv-ink);
+    font-family: "Helvetica Neue", Helvetica, "Inter Tight", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .font-display { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: -0.035em; font-weight: 500; }
+  .font-editorial { font-family: "Times New Roman", "Times", serif; font-style: italic; letter-spacing: -0.01em; }
+  .font-mono { font-family: "SF Mono", "JetBrains Mono", "Menlo", monospace; letter-spacing: 0.02em; }
+  .tv-eyebrow { font-family: "SF Mono", "JetBrains Mono", "Menlo", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tv-ink-2); }
+  .num-display { font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: 400; letter-spacing: -0.04em; line-height: 0.86; }
+
+  .btn-primary { background: #0A0A0A; color: #fff; height: 52px; border-radius: 10px; padding: 0 24px; font-size: 14px; font-weight: 500; transition: all .3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; border: 0; }
+  .btn-primary:hover:not(:disabled) { background: #1D1D1F; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,.12); }
+  .btn-primary:disabled { opacity: .4; cursor: not-allowed; }
+  .btn-secondary { background: transparent; color: #1D1D1F; border: 1px solid var(--tv-line); height: 44px; border-radius: 8px; padding: 0 18px; font-size: 13px; font-weight: 500; transition: all .3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
+  .btn-secondary:hover { border-color: var(--tv-ink); background: var(--tv-bg); }
+
+  .field-label { font-family: "SF Mono", Menlo, monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tv-ink-3); }
+  .field-input {
+    width: 100%; height: 48px; padding: 0 14px;
+    border-radius: 10px;
+    border: 1px solid var(--tv-line);
+    background: #fff;
+    color: var(--tv-ink);
+    font-size: 15px;
+    outline: none;
+    transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .field-input::placeholder { color: var(--tv-ink-3); }
+  .field-input:focus { border-color: var(--tv-ink); box-shadow: 0 0 0 4px rgba(10,10,10,.06); }
+  .field-input.is-error { border-color: #be123c; }
+  .field-textarea { min-height: 96px; padding: 12px 14px; line-height: 1.5; height: auto; }
+
+  .badge { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px; border-radius: 4px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-family: "SF Mono", "JetBrains Mono", Menlo, monospace; }
+  .badge-light { background: #fff; color: var(--tv-ink); border: 1px solid var(--tv-line); }
+  .badge-dark  { background: var(--tv-ink); color: #fff; }
+  .badge-emerald { background: rgba(16,185,129,.10); color: #047857; border: 1px solid rgba(16,185,129,.25); }
+
+  .step-dot {
+    width: 24px; height: 24px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: "SF Mono", Menlo, monospace; font-size: 11px;
+    background: rgba(0,0,0,.05); color: var(--tv-ink-2);
+  }
+  .step-dot.is-done { background: #0A0A0A; color: #fff; }
+  .step-dot.is-current { background: rgba(16,185,129,.15); color: #047857; border: 1px solid rgba(16,185,129,.4); }
+
+  .nav-glass { background: rgba(250,250,250,0.85); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--tv-line); }
+
+  /* check chip */
+  .tv-check { width: 16px; height: 16px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--tv-ink); color: #fff; flex-shrink: 0; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script type="text/babel" data-presets="env,react" src="components.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="aprovacao.jsx"></script>
+  <script type="text/babel" data-presets="env,react">
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<Aprovacao/>);
+  </script>
+</body>
+</html>
