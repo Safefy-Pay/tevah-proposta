@@ -689,14 +689,14 @@ const Footer = () => {
             <a href="#">Termos de uso</a>
             <a href="#">LGPD</a>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
             <span className="flex items-center gap-1.5"><Icon name="shield" size={12}/> Site seguro · SSL</span>
-            <span className="flex items-center gap-2 normal-case tracking-normal font-sans">
-              <span className="px-2 py-1 rounded bg-white border border-[var(--tv-line)] text-[var(--tv-ink-2)]">Pix</span>
-              <span className="px-2 py-1 rounded bg-white border border-[var(--tv-line)] text-[var(--tv-ink-2)]">Visa</span>
-              <span className="px-2 py-1 rounded bg-white border border-[var(--tv-line)] text-[var(--tv-ink-2)]">Master</span>
-              <span className="px-2 py-1 rounded bg-white border border-[var(--tv-line)] text-[var(--tv-ink-2)]">Elo</span>
-              <span className="px-2 py-1 rounded bg-white border border-[var(--tv-line)] text-[var(--tv-ink-2)]">Boleto</span>
+            <span className="flex items-center gap-1.5">
+              <PayBadge brand="pix"/>
+              <PayBadge brand="visa"/>
+              <PayBadge brand="master"/>
+              <PayBadge brand="elo"/>
+              <PayBadge brand="boleto"/>
             </span>
           </div>
         </div>

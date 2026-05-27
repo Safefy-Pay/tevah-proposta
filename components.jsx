@@ -374,4 +374,90 @@ const Reveal = ({ children, className = "" }) => (
   <div className={"reveal " + className}>{children}</div>
 );
 
-Object.assign(window, { Icon, Wordmark, Photo, Announce, Navbar, TrustBar, ProductCard, SectionHead, Reveal });
+/* ---------- Payment method badges ---------- */
+const PayBadge = ({ brand }) => {
+  const wrap = {
+    height: 22,
+    minWidth: 36,
+    padding: "0 6px",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "#fff",
+    border: "1px solid var(--tv-line)",
+    borderRadius: 4,
+  };
+  switch (brand) {
+    case "pix":
+      return (
+        <span style={wrap} aria-label="Pix">
+          <svg width="22" height="14" viewBox="0 0 512 182" xmlns="http://www.w3.org/2000/svg">
+            <g fill="#32BCAD">
+              <path d="M141.3 134.6c-7.4 0-14.4-2.9-19.6-8.1L97.3 102c-2-1.9-5.5-1.9-7.5 0l-24.5 24.6c-5.2 5.2-12.2 8.1-19.6 8.1h-4.8l31 31.1c9.7 9.7 25.4 9.7 35.1 0l31.1-31.1h-1.8zm-95.7-87.2c7.4 0 14.4 2.9 19.6 8.1l24.6 24.6c2.1 2.1 5.4 2.1 7.5 0l24.4-24.5c5.2-5.2 12.2-8.1 19.6-8.1h3l-31.1-31c-9.7-9.7-25.4-9.7-35.1 0l-31 31h-1.5z"/>
+              <path d="M170.5 75 151.7 56.2c-.4.2-.9.3-1.3.3h-9c-5.1 0-10 2.1-13.6 5.7l-24.5 24.5c-2.6 2.6-6.1 4-9.7 4-3.7 0-7.1-1.4-9.7-4L59.2 62.2c-3.6-3.6-8.5-5.7-13.6-5.7H35.2c-.5 0-.9-.1-1.3-.3L15.1 75c-9.7 9.7-9.7 25.4 0 35.1L33.9 129c.4-.2.8-.3 1.3-.3h10.4c5.1 0 10-2.1 13.6-5.7l24.5-24.5c5.2-5.2 14.2-5.2 19.4 0L127.7 123c3.6 3.6 8.5 5.7 13.6 5.7h9c.5 0 .9.1 1.3.3l18.8-18.8c9.8-9.8 9.8-25.5.1-35.2z"/>
+            </g>
+            <g fill="#0F0F0F">
+              <path d="M225.4 53.3h28.8c19.3 0 30.7 11.4 30.7 28v.3c0 18.7-14.6 28.5-32.4 28.5h-11.8v23.3h-15.3V53.3zm27.8 43.1c8.9 0 14.1-5.3 14.1-12.3v-.2c0-8-5.6-12.3-14.4-12.3h-12.2v24.8h12.5zM292.7 53.3h15.3v80.1h-15.3zM314.8 110.4l25-29.6h-23.7V67.2h44.2v13.5l-25 29.6h25v13.5h-45.5zM376.3 67.2h15.3v66.2h-15.3zm-.6-25h16.5v13.5h-16.5zM402.4 100.4v-.2c0-19.1 14.3-34.5 33.9-34.5 19.4 0 33.7 15.2 33.7 34.2v.2c0 19.1-14.3 34.5-33.9 34.5-19.4.1-33.7-15.1-33.7-34.2zm52.4 0v-.2c0-10.8-7.7-19.7-18.7-19.7-11.2 0-18.5 8.8-18.5 19.5v.2c0 10.8 7.7 19.7 18.7 19.7 11.3 0 18.5-8.8 18.5-19.5z"/>
+            </g>
+          </svg>
+        </span>
+      );
+    case "visa":
+      return (
+        <span style={wrap} aria-label="Visa">
+          <svg width="30" height="10" viewBox="0 0 750 250" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#1A1F71" d="M278.2 6.1 182.6 234.6h-62.4L73.1 52.6c-2.9-11.3-5.3-15.4-14.1-20.2C44.8 24.6 21.4 17.2 0 12.7l1.4-6.6h100.3c12.8 0 24.3 8.5 27.2 23.2l24.8 131.7L215.8 6.1h62.4zm244.9 154c.3-60.5-83.7-63.9-83.1-90.9.2-8.2 8-16.9 25.2-19.1 8.5-1.1 31.9-2 58.4 10.2L534 12.6c-14.3-5.2-32.7-10.2-55.6-10.2-58.7 0-100 31.2-100.4 75.9-.4 33 29.5 51.4 52 62.4 23.2 11.2 31 18.5 30.9 28.5-.2 15.4-18.5 22.2-35.6 22.5-29.9.5-47.2-8.1-61-14.5l-10.8 50.3c13.9 6.4 39.5 11.9 66 12.2 62.5 0 103.4-30.8 103.6-78.6zm155.7 74.5h54.9L685.7 6.1H635c-11.4 0-21 6.6-25.3 16.8L515 234.6h62.4l12.4-34.3h76.3l7.2 34.3zm-66.3-81.4 31.3-86.2 18 86.2h-49.3zM363.1 6.1l-49.2 228.5h-59.4L303.7 6.1h59.4z"/>
+          </svg>
+        </span>
+      );
+    case "master":
+      return (
+        <span style={wrap} aria-label="Mastercard">
+          <svg width="26" height="16" viewBox="0 0 152 108" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="56" cy="54" r="48" fill="#EB001B"/>
+            <circle cx="96" cy="54" r="48" fill="#F79E1B"/>
+            <path fill="#FF5F00" d="M76 21.5a47.86 47.86 0 0 1 0 65 47.86 47.86 0 0 1 0-65z"/>
+          </svg>
+        </span>
+      );
+    case "elo":
+      return (
+        <span style={{ ...wrap, background: "#000" }} aria-label="Elo">
+          <svg width="28" height="14" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="13" fill="none" stroke="#FFF200" strokeWidth="4.5"/>
+            <path d="M18 5v26" stroke="#000" strokeWidth="6"/>
+            <path d="M13 9.5 23 26.5" stroke="#EC1C24" strokeWidth="4.5" strokeLinecap="round"/>
+            <text x="38" y="25" fontFamily="Helvetica, Arial, sans-serif" fontWeight="700" fontSize="18" fill="#fff" letterSpacing="-0.5">elo</text>
+          </svg>
+        </span>
+      );
+    case "boleto":
+      return (
+        <span style={wrap} aria-label="Boleto">
+          <svg width="28" height="14" viewBox="0 0 56 24" xmlns="http://www.w3.org/2000/svg">
+            <g fill="#1D1D1F">
+              <rect x="2"  y="3" width="1.5" height="18"/>
+              <rect x="5"  y="3" width="3"   height="18"/>
+              <rect x="9.5" y="3" width="1" height="18"/>
+              <rect x="12" y="3" width="2.5" height="18"/>
+              <rect x="16" y="3" width="1"   height="18"/>
+              <rect x="18.5" y="3" width="3" height="18"/>
+              <rect x="23"  y="3" width="1.5" height="18"/>
+              <rect x="26"  y="3" width="2"   height="18"/>
+              <rect x="29.5" y="3" width="1" height="18"/>
+              <rect x="32"  y="3" width="3"   height="18"/>
+              <rect x="36.5" y="3" width="1.5" height="18"/>
+              <rect x="39.5" y="3" width="1"   height="18"/>
+              <rect x="42"  y="3" width="2.5" height="18"/>
+              <rect x="46"  y="3" width="1"   height="18"/>
+              <rect x="48.5" y="3" width="3" height="18"/>
+            </g>
+          </svg>
+        </span>
+      );
+    default:
+      return null;
+  }
+};
+
+Object.assign(window, { Icon, Wordmark, Photo, Announce, Navbar, TrustBar, ProductCard, SectionHead, Reveal, PayBadge });
